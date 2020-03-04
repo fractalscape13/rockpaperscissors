@@ -36,6 +36,34 @@ namespace RPS.Models
             TypeLine(outcome);
             CheckWinner();
         }
+        public void PvCGamePlay()
+        {  
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            TypeLine("Player One: Enter choice (rock, paper or scissors)");
+            Player1Move = Console.ReadLine();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Random randNum = new Random();
+            int index = randNum.Next(1, 4);
+            if (index == 1)
+            {
+                Player2Move = "rock";
+            }
+            else if (index == 2)
+            {
+                Player2Move = "paper";
+            }
+            else if (index == 3)
+            {
+                Player2Move = "scissors";
+            }
+            Console.Clear();
+            TypeLine("Computer chose " + Player2Move);
+            string outcome = CheckGame();
+            Console.ForegroundColor = ConsoleColor.Green;
+            TypeLine(outcome);
+            CheckWinner();
+        }
 
         public string CheckGame()
         {
