@@ -59,10 +59,10 @@ namespace RPS.Models
             }
             Console.Clear();
             TypeLine("Computer chose " + Player2Move);
-            string outcome = CheckGame();
+            string outcome = PvCCheckGame();
             Console.ForegroundColor = ConsoleColor.Green;
             TypeLine(outcome);
-            CheckWinner();
+            PvCCheckWinner();
         }
 
         public string CheckGame()
@@ -86,6 +86,27 @@ namespace RPS.Models
                 return "Sorry, I didn't get that";
             }
         }
+        public string PvCCheckGame()
+        {
+            if (Player1Move == Player2Move)
+            {
+                return "Draw!";
+            }
+            else if ((Player1Move == "rock" && Player2Move == "scissors") || (Player1Move == "paper" && Player2Move == "rock") || (Player1Move == "scissors" && Player2Move == "paper")) 
+            {
+                Player1Score += 1;
+                return "Player One wins this round";
+            }     
+            else if ((Player2Move == "rock" && Player1Move == "scissors") || (Player2Move == "paper" && Player1Move == "rock") || (Player2Move == "scissors" && Player1Move == "paper")) 
+            {
+                Player2Score += 1;
+                return "Computer wins this round";
+            }
+            else 
+            {
+                return "Sorry, I didn't get that";
+            }
+        }
 
         public void CheckWinner()
         {
@@ -102,6 +123,23 @@ namespace RPS.Models
             else
             {
                 GamePlay();
+            }
+        }
+        public void PvCCheckWinner()
+        {
+            if (Player1Score >= WinCount)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                TypeLine("Player One Wins!");
+            }
+            else if (Player2Score >= WinCount)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                TypeLine("Computer Wins!");
+            }
+            else
+            {
+                PvCGamePlay();
             }
         }
 
