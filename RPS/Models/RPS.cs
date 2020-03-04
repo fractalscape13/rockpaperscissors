@@ -19,7 +19,24 @@ namespace RPS.Models
            WinCount = 1;
 
         }
-        
+        public void GamePlay()
+        {  
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            TypeLine("Player Two, please look away");
+            TypeLine("Player One: Enter choice (rock, paper or scissors)");
+            Player1Move = Console.ReadLine();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            TypeLine("Player One, please look away");
+            TypeLine("Player Two: Enter choice (rock, paper or scissors)");
+            Player2Move = Console.ReadLine();
+            Console.Clear();
+            string outcome = CheckGame();
+            Console.ForegroundColor = ConsoleColor.Green;
+            TypeLine(outcome);
+            CheckWinner();
+        }
+
         public string CheckGame()
         {
             if (Player1Move == Player2Move)
@@ -40,24 +57,6 @@ namespace RPS.Models
             {
                 return "Sorry, I didn't get that";
             }
-        }
-
-        public void GamePlay()
-        {  
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            TypeLine("Player Two, please look away");
-            TypeLine("Player One: Enter choice (rock, paper or scissors)");
-            Player1Move = Console.ReadLine();
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            TypeLine("Player One, please look away");
-            TypeLine("Player Two: Enter choice (rock, paper or scissors)");
-            Player2Move = Console.ReadLine();
-            Console.Clear();
-            string outcome = CheckGame();
-            Console.ForegroundColor = ConsoleColor.Green;
-            TypeLine(outcome);
-            CheckWinner();
         }
 
         public void CheckWinner()

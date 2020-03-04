@@ -13,13 +13,28 @@ namespace RPS
             TypeLine("Let's decide an amount of rounds to play");
             TypeLine("How many rounds won will end the match? Please enter a whole number");
             Game newGame = new Game();
-            newGame.WinCount = int.Parse(Console.ReadLine());
+            try
+            {
+                newGame.WinCount = int.Parse(Console.ReadLine());       
+            }
+            catch (System.Exception)
+            {
+                Console.Write(Environment.NewLine);
+                Console.ForegroundColor = ConsoleColor.Red;
+                TypeLine("That wasn't a valid number... please try again");
+                TypeLine("1......................................");
+                System.Threading.Thread.Sleep(1000);
+                TypeLine("2.........................................");
+                System.Threading.Thread.Sleep(1000);
+                TypeLine("3...........................................");
+                System.Threading.Thread.Sleep(1000);
+                Main();
+            }
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             TypeLine("Okay, lets play! First to " + newGame.WinCount + " wins!");
             newGame.GamePlay();
         }
-
 
         public static void TypeLine(string input)
         {
