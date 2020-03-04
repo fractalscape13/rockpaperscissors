@@ -16,24 +16,24 @@ namespace RPS
             try
             {
                 newGame.WinCount = int.Parse(Console.ReadLine());       
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                TypeLine("Okay, lets play! First to " + newGame.WinCount + " wins!");
+                newGame.GamePlay();
             }
             catch (System.Exception)
             {
                 Console.Write(Environment.NewLine);
                 Console.ForegroundColor = ConsoleColor.Red;
-                TypeLine("That wasn't a valid number... please try again");
-                TypeLine("1......................................");
-                System.Threading.Thread.Sleep(1000);
-                TypeLine("2.........................................");
-                System.Threading.Thread.Sleep(1000);
-                TypeLine("3...........................................");
-                System.Threading.Thread.Sleep(1000);
+                TypeLine("That wasn't a valid number... please try again in..");
+                TypeLine("3........................");
+                System.Threading.Thread.Sleep(300);
+                TypeLine("2..................................");
+                System.Threading.Thread.Sleep(300);
+                TypeLine("1...........................................");
+                System.Threading.Thread.Sleep(300);
                 Main();
             }
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            TypeLine("Okay, lets play! First to " + newGame.WinCount + " wins!");
-            newGame.GamePlay();
         }
 
         public static void TypeLine(string input)
