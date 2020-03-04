@@ -12,8 +12,8 @@ namespace RPS.Test
             Game newGame = new Game();
             newGame.Player1Move = "rock";
             newGame.Player2Move = "scissors";
-            string result = newGame.RunGame();
-            Assert.AreEqual(result, "Player One Wins");
+            string result = newGame.CheckGame();
+            Assert.AreEqual(result, "Player One wins this round");
         }    
         [TestMethod]
         public void RunGame_GetResult_Player2Wins()
@@ -21,8 +21,8 @@ namespace RPS.Test
             Game newGame = new Game();
             newGame.Player1Move = "paper";
             newGame.Player2Move = "scissors";
-            string result = newGame.RunGame();
-            Assert.AreEqual(result, "Player Two Wins");
+            string result = newGame.CheckGame();
+            Assert.AreEqual(result, "Player Two wins this round");
         }    
         [TestMethod]
         public void RunGame_GetResult_Draw()
@@ -30,7 +30,7 @@ namespace RPS.Test
             Game newGame = new Game();
             newGame.Player1Move = "rock";
             newGame.Player2Move = "rock";
-            string result = newGame.RunGame();
+            string result = newGame.CheckGame();
             Assert.AreEqual(result, "Draw!");
         }    
         

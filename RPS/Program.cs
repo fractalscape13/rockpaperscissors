@@ -8,24 +8,18 @@ namespace RPS
         static void Main()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             TypeLine("Welcome to the Rock, Paper, Scissors game!");
-            TypeLine("Are you ready to play? Press enter to start game");
-            string startGame = Console.ReadLine();
-            if (startGame != null)
-            {
-                Console.Clear();
-                Game newGame = new Game();
-                TypeLine("Please enter Player One's choice (rock, paper or scissors)");
-                newGame.Player1Move = Console.ReadLine();
-                Console.Clear();
-                TypeLine("Please enter Player Two's choice (rock, paper or scissors)");
-                newGame.Player2Move = Console.ReadLine();
-                Console.Clear();
-                string outcome = newGame.RunGame();
-                TypeLine(outcome);
-            }
-
+            TypeLine("Let's decide an amount of rounds to play");
+            TypeLine("How many rounds won will end the match? Please enter a whole number");
+            Game newGame = new Game();
+            newGame.WinCount = int.Parse(Console.ReadLine());
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            TypeLine("Okay, lets play! First to " + newGame.WinCount + " wins!");
+            newGame.GamePlay();
         }
+
 
         public static void TypeLine(string input)
         {
