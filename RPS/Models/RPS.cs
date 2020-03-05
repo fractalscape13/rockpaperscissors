@@ -19,53 +19,61 @@ namespace RPS.Models
            WinCount = 1;
 
         }
-        public void GamePlay()
+        public void GamePlay(string type)
         {  
             Console.ForegroundColor = ConsoleColor.Magenta;
-            TypeLine("Player Two, please look away");
+            if (type == "pvp")
+            {
+                TypeLine("Player Two, please look away");
+            }
             TypeLine("Player One: Enter choice (rock, paper or scissors)");
             Player1Move = Console.ReadLine();
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            TypeLine("Player One, please look away");
-            TypeLine("Player Two: Enter choice (rock, paper or scissors)");
-            Player2Move = Console.ReadLine();
-            Console.Clear();
-            string outcome = CheckGame();
+            if (type == "pvp")
+            {
+                TypeLine("Player One, please look away");
+                TypeLine("Player Two: Enter choice (rock, paper or scissors)");
+                Player2Move = Console.ReadLine();
+                Console.Clear();
+                TypeLine("Player One chose " + Player1Move);
+                TypeLine("Player Two chose " + Player2Move);
+            }
+            else if (type == "pvc")
+            {
+                Random randNum = new Random();
+                int index = randNum.Next(1, 4);
+                if (index == 1)
+                {
+                    Player2Move = "rock";
+                }
+                else if (index == 2)
+                {
+                    Player2Move = "paper";
+                }
+                else if (index == 3)
+                {
+                    Player2Move = "scissors";
+                }
+                TypeLine("Player One chose " + Player1Move);
+                TypeLine("Computer chose " + Player2Move);
+            }
+            string outcome = CheckGame(type);
             Console.ForegroundColor = ConsoleColor.Green;
             TypeLine(outcome);
-            CheckWinner();
-        }
-        public void PvCGamePlay()
-        {  
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            TypeLine("Player One: Enter choice (rock, paper or scissors)");
-            Player1Move = Console.ReadLine();
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Random randNum = new Random();
-            int index = randNum.Next(1, 4);
-            if (index == 1)
+            TypeLine("Player One current score: " + Player1Score);
+            if (type == "pvp")
             {
-                Player2Move = "rock";
+                TypeLine("Player Two current score: " + Player2Score);
             }
-            else if (index == 2)
+            else if (type == "pvc")
             {
-                Player2Move = "paper";
+                TypeLine("Computer current score: " + Player2Score);
             }
-            else if (index == 3)
-            {
-                Player2Move = "scissors";
-            }
-            Console.Clear();
-            TypeLine("Computer chose " + Player2Move);
-            string outcome = PvCCheckGame();
-            Console.ForegroundColor = ConsoleColor.Green;
-            TypeLine(outcome);
-            PvCCheckWinner();
+            CheckWinner(type);
         }
 
-        public string CheckGame()
+        public string CheckGame(string type)
         {
             if (Player1Move == Player2Move)
             {
@@ -79,28 +87,18 @@ namespace RPS.Models
             else if ((Player2Move == "rock" && Player1Move == "scissors") || (Player2Move == "paper" && Player1Move == "rock") || (Player2Move == "scissors" && Player1Move == "paper")) 
             {
                 Player2Score += 1;
-                return "Player Two wins this round";
-            }
-            else 
-            {
-                return "Sorry, I didn't get that";
-            }
-        }
-        public string PvCCheckGame()
-        {
-            if (Player1Move == Player2Move)
-            {
-                return "Draw!";
-            }
-            else if ((Player1Move == "rock" && Player2Move == "scissors") || (Player1Move == "paper" && Player2Move == "rock") || (Player1Move == "scissors" && Player2Move == "paper")) 
-            {
-                Player1Score += 1;
-                return "Player One wins this round";
-            }     
-            else if ((Player2Move == "rock" && Player1Move == "scissors") || (Player2Move == "paper" && Player1Move == "rock") || (Player2Move == "scissors" && Player1Move == "paper")) 
-            {
-                Player2Score += 1;
-                return "Computer wins this round";
+                if (type == "pvp")
+                {
+                    return "Player Two wins this round";
+                }
+                else if (type == "pvc")
+                {
+                    return "Computer wins this round";
+                }
+                else
+                {
+                    return "Error";
+                }
             }
             else 
             {
@@ -108,7 +106,7 @@ namespace RPS.Models
             }
         }
 
-        public void CheckWinner()
+        public void CheckWinner(string type)
         {
             if (Player1Score >= WinCount)
             {
@@ -118,28 +116,18 @@ namespace RPS.Models
             else if (Player2Score >= WinCount)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                TypeLine("Player Two Wins!");
+                if (type == "pvc")
+                {
+                    TypeLine("Computer Wins!");
+                }
+                else
+                {
+                    TypeLine("Player Two Wins!");
+                }
             }
             else
             {
-                GamePlay();
-            }
-        }
-        public void PvCCheckWinner()
-        {
-            if (Player1Score >= WinCount)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                TypeLine("Player One Wins!");
-            }
-            else if (Player2Score >= WinCount)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                TypeLine("Computer Wins!");
-            }
-            else
-            {
-                PvCGamePlay();
+                GamePlay(type);
             }
         }
 

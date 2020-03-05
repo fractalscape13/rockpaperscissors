@@ -14,29 +14,20 @@ namespace RPS
             string gameType = Console.ReadLine();
             if (gameType == "pvp")
             {
-                PvPGame();
+                RunGame(gameType);
             }
             else if (gameType == "pvc")
             {
-                PvCGame();
+                RunGame(gameType);
             }
             else
             {
-                Console.Write(Environment.NewLine);
-                Console.ForegroundColor = ConsoleColor.Red;
-                TypeLine("That wasn't a valid choice... please try again in..");
-                TypeLine("3........................");
-                System.Threading.Thread.Sleep(300);
-                TypeLine("2..................................");
-                System.Threading.Thread.Sleep(300);
-                TypeLine("1...........................................");
-                System.Threading.Thread.Sleep(300);
-                Main(); 
+                ErrorMessage();
             }
 
         }
 
-        static void PvPGame()
+        static void RunGame(string type)
         {
             Console.Clear();
             TypeLine("Let's decide an amount of rounds to play");
@@ -48,49 +39,11 @@ namespace RPS
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
                 TypeLine("Okay, lets play! First to " + newGame.WinCount + " wins!");
-                newGame.GamePlay();
+                newGame.GamePlay(type);
             }
             catch (System.Exception)
             {
-                Console.Write(Environment.NewLine);
-                Console.ForegroundColor = ConsoleColor.Red;
-                TypeLine("That wasn't a valid number... please try again in..");
-                TypeLine("3........................");
-                System.Threading.Thread.Sleep(300);
-                TypeLine("2..................................");
-                System.Threading.Thread.Sleep(300);
-                TypeLine("1...........................................");
-                System.Threading.Thread.Sleep(300);
-                Main();
-            }
-        }
-
-        static void PvCGame()
-        {
-            Console.Clear();
-            TypeLine("Let's decide an amount of rounds to play");
-            TypeLine("How many rounds won will end the match? Please enter a whole number");
-            Game newGame = new Game();
-            try
-            {
-                newGame.WinCount = int.Parse(Console.ReadLine());       
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                TypeLine("Okay, lets play! First to " + newGame.WinCount + " wins!");
-                newGame.PvCGamePlay();
-            }
-            catch (System.Exception)
-            {
-                Console.Write(Environment.NewLine);
-                Console.ForegroundColor = ConsoleColor.Red;
-                TypeLine("That wasn't a valid number... please try again in..");
-                TypeLine("3........................");
-                System.Threading.Thread.Sleep(300);
-                TypeLine("2..................................");
-                System.Threading.Thread.Sleep(300);
-                TypeLine("1...........................................");
-                System.Threading.Thread.Sleep(300);
-                Main();
+                ErrorMessage();
             }
         }
 
@@ -103,6 +56,20 @@ namespace RPS
         }
         Console.Write(Environment.NewLine);
         Console.Write(Environment.NewLine);
+        }
+
+        public static void ErrorMessage()
+        {
+            Console.Write(Environment.NewLine);
+            Console.ForegroundColor = ConsoleColor.Red;
+            TypeLine("That wasn't a valid choice... please try again in..");
+            TypeLine("3........................");
+            System.Threading.Thread.Sleep(300);
+            TypeLine("2..................................");
+            System.Threading.Thread.Sleep(300);
+            TypeLine("1...........................................");
+            System.Threading.Thread.Sleep(300);
+            Main(); 
         }
     }
 }
